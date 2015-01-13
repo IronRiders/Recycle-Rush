@@ -9,12 +9,14 @@ import edu.wpi.first.wpilibj.Solenoid;
  * @author Thomas Noble
  */
 public class Pneumatics {
-    private static final int TEMP_PORT = 10;
-    private int RELAY_PORT_GRIP = 1;
-    private int RELAY_PORT_SHIFT = 2;
-    private int GRIP_PORT = 1;
+    //NOTE: Reassign ports when we know which port things go to
+    private static final int TEMP_PORT_ONE = 10;
+    private static final int TEMP_PORT_TWO = 11;
+    private int RELAY_PORT_GRIP = TEMP_PORT_ONE;
+    private int RELAY_PORT_SHIFT = TEMP_PORT_TWO;
+    private int GRIP_PORT = TEMP_PORT_ONE;
     private Relay gripRelay;
-    private int SHIFT_PORT = 2;
+    private int SHIFT_PORT = TEMP_PORT_TWO;
     private Solenoid grip;
     private Relay shiftRelay;
     private Solenoid shift;
