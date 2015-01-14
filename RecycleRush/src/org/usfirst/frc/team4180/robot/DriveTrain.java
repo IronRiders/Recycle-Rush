@@ -23,7 +23,7 @@ public class DriveTrain {
 
 
 //    private static final int TEMP_PORT = 10;
-//    private int GEAR_SHIFT_PORT = TEMP_PORT_TWO;
+//    private int GEAR_SHIFT_PORT = TEMP_PORT;
 //    private Solenoid gearShift;
 //
 //    public DriveTrain() {
