@@ -2,12 +2,18 @@ package org.usfirst.frc.team4180.robot;
 
 public class DriveTrain {
 	
-	private TALON_RIGHT
-	private TALON_LEFT
-	private double JOYSTICK_X
-	private double JOYSTICK_Y
-
-	public DriveTrain() {
+	private TALON_RIGHT;
+	private TALON_LEFT;
+	private double JOYSTICK_X;
+	private double JOYSTICK_Y;
+//    private static final int TEMP_PORT = 10;
+//    private int GEAR_SHIFT_PORT = TEMP_PORT;
+//    private Relay gearShiftRelay;
+//    private Solenoid gearShift;
+	
+	public DriveTrain(){
+//        shiftRelay = new Relay(GEAR_SHIFT_PORT);
+//        shift = new Solenoid(GEAR_SHIFT_PORT);
 		TALON_RIGHT= new Talon(0);
 		TALON_LEFT= new Talon(1);
 		JOYSTICK_X = 0.0;
