@@ -24,21 +24,54 @@ public class DriveTrain {
 
 //    private static final int TEMP_PORT = 10;
 //    private int GEAR_SHIFT_PORT = TEMP_PORT;
+//    private Relay gearShiftRelay;
 //    private Solenoid gearShift;
 //
 //    public DriveTrain() {
-//        gearShift = new Solenoid(GEAR_SHIFT_PORT);
+//        shiftRelay = new Relay(GEAR_SHIFT_PORT);
+//        shift = new Solenoid(GEAR_SHIFT_PORT);
 //    }
 //    
 //    /**
-//     * Turns the shift solenoid on
+//     * Turns the gearShift solenoid on
 //     */
 //    public void gearShiftSolenoidOn(){
 //        gearShift.set(true);
 //    }
 //    
 //    /**
-//     * Turns the shift solenoid off
+//     * Turns on the gearShift relay
+//     */
+//    public void gearShiftRelayOn()
+//    {
+//        gearShiftRelay.set(Relay.Value.kForward);
+//    }
+//
+//    /**
+//     * Gives the gearShift relay the value to reverse
+//     */
+//    public void gearShiftRelayReverse(){
+//        gearShiftRelay.set(Relay.Value.kReverse);
+//    }
+//
+//    /**
+//     * Turns the gearShift relay off
+//     */
+//    public void gearShiftRelayOff() {
+//        gearShiftRelay.set(Relay.Value.kOn);
+//    }
+//    
+//    /**
+//     * Gives the port number of the gearShift relay
+//     * @return the port of the gearShift relay
+//     */
+//    public int getGearShiftRelayPort()
+//    {
+//        return GEAR_SHIFT_PORT;
+//    }
+//
+//  /**
+//     * Turns the gearShift solenoid off
 //     */
 //    public void gearShiftSolenoidOff(){
 //        gearShift.set(false);
