@@ -20,7 +20,7 @@ public class DriveTrain {
 		JOYSTICK_Y = 0.0;
 	}
 		
-	public void setSpeed(rightTalonSpeed, leftTalonSpeed){
+	public void setSpeed(double rightTalonSpeed, double leftTalonSpeed){
 		TALON_RIGHT.set(rightTalonSpeed);
 		TALON_LEFT.set(leftTalonSpeed);
 	}
