@@ -1,7 +1,9 @@
 package org.usfirst.frc.team4180.robot;
 
+import edu.wpi.first.wpilibj.Jaguar;
+
 public class Elevator {
-	private WINCH_JAGUAR;
+	private Jaguar WINCH_JAGUAR;
 	private double JOYSTICK_Y;
 //    private static final int TEMP_PORT = 11;
 //    private int RELAY_PORT_GRIP = TEMP_PORT;
@@ -16,7 +18,7 @@ public class Elevator {
 //        grip = new Solenoid(GRIP_PORT);
 	}
 	
-	public void setSpeed(speed){
+	public void setSpeed(double speed){
 		WINCH_JAGUAR.set(speed);
 	}
 

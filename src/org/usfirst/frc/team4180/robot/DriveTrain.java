@@ -1,9 +1,11 @@
 package org.usfirst.frc.team4180.robot;
 
+import edu.wpi.first.wpilibj.Talon;
+
 public class DriveTrain {
 	
-	private TALON_RIGHT;
-	private TALON_LEFT;
+	private Talon TALON_RIGHT;
+	private Talon TALON_LEFT;
 	private double JOYSTICK_X;
 	private double JOYSTICK_Y;
 //    private static final int TEMP_PORT = 10;
