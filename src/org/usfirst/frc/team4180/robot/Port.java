@@ -1,5 +1,9 @@
 package org.usfirst.frc.team4180.robot;
 
+/**
+*
+* @author Nate Spencer(A.K.A The Greatest)
+*/
 public enum Port {
 	LEVEL_ZERO_LIMIT_SWITCH (0), 
 	LEVEL_ONE_LIMIT_SWITCH (1), 
