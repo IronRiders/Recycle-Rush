@@ -1,7 +1,4 @@
-package org.usfirst.frc.team4180.robot;
-
-import java.awt.Button;
-
+package org.usfirst.frc.team4180.controls;
 
 public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick {
 	public static final Button[] BUTTONS = new Button[] {
