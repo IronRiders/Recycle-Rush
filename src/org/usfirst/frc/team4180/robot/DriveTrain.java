@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.Talon;
 
 public class DriveTrain {
 	
-	private Talon TALON_RIGHT;
-	private Talon TALON_LEFT;
-	private double JOYSTICK_X;
-	private double JOYSTICK_Y;
+	private Talon talonRight;
+	private Talon talonLeft;
+	private double joystickX;
+	private double joystickY;
 //    private static final int TEMP_PORT = 10;
 //    private int GEAR_SHIFT_PORT = TEMP_PORT;
 //    private Relay gearShiftRelay;
@@ -16,15 +16,15 @@ public class DriveTrain {
 	public DriveTrain(){
 //        shiftRelay = new Relay(GEAR_SHIFT_PORT);
 //        shift = new Solenoid(GEAR_SHIFT_PORT);
-		TALON_RIGHT= new Talon(0);
-		TALON_LEFT= new Talon(1);
-		JOYSTICK_X = 0.0;
-		JOYSTICK_Y = 0.0;
+		talonRight= new Talon(0);
+		talonLeft = new Talon(1);
+		joystickX = 0.0;
+		joystickY = 0.0;
 	}
 		
 	public void setSpeed(double rightTalonSpeed, double leftTalonSpeed){
-		TALON_RIGHT.set(rightTalonSpeed);
-		TALON_LEFT.set(leftTalonSpeed);
+		talonRight.set(rightTalonSpeed);
+		talonLeft.set(leftTalonSpeed);
 	}
 	
 //    /**
