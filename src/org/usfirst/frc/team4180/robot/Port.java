@@ -23,6 +23,7 @@ public enum Port {
 	Port(int portNumber){
 		PORT_NUMBER = portNumber;
 	}
+	
 	public int GetPort() {
 		return PORT_NUMBER;
 	}
