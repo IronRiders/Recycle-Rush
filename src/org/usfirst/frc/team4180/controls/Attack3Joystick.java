@@ -47,19 +47,9 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
                 wasPressed = ((Boolean)STATE.get(button));
             }
             
-            //if (THREADS[button.getButtonNumber() - 1] == null) {
-            //    THREADS[button.getButtonNumber() - 1] = new Thread() {
-            //        public void run(){
+           
                         notifyButtonListeners(button, isPressed.booleanValue(), wasPressed.booleanValue());
-            //        }
-            //    };
-            //}
             
-            //if (THREADS[button.getButtonNumber() - 1] != null) {
-            //    THREADS[button.getButtonNumber() - 1].start();
-            //}
-            
-            // Save the new STATE of the button
             STATE.put(button, isPressed);
         }
         
@@ -78,7 +68,7 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
     public void addButtonListener(Button[] buttons, ButtonListener listener){
         for(int i = 0; i < buttons.length; i++){
             addButtonListener(buttons[i], listener);
-            //System.out.println("Attached Button Listener");
+            
         }
     }
            
@@ -88,15 +78,13 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
         	if (isPressed && !wasPressed) {
                 for (int count = 0; count < listeners.size(); count++){
                     ButtonListener bl = (ButtonListener)listeners.get(count);
-                     // re-add the line below after the method has been implemented
-//                    bl.buttonDown(button);
+                     
                 }
             }
             else if (!isPressed && wasPressed) {
                 for (int count = 0; count < listeners.size(); count++){
                     ButtonListener bl = (ButtonListener)listeners.get(count);
-                 // re-add the line below after the method has been implemented
-//                    bl.buttonUp(button);
+                 
                 }
             }
         }

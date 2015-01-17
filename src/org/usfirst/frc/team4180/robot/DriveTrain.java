@@ -10,16 +10,12 @@ public class DriveTrain {
 	private Talon talonLeft;
 	private double joystickX;
 	private double joystickY;
-    private static final int TEMP_PORT = 10;
-    private int GEAR_SHIFT_PORT = TEMP_PORT;
-    private Relay gearShiftRelay;
     private Solenoid gearShift;
 	
 	public DriveTrain(){
-        gearShiftRelay = new Relay(GEAR_SHIFT_PORT);
-        gearShift = new Solenoid(GEAR_SHIFT_PORT);
-		talonRight= new Talon(0);
-		talonLeft = new Talon(1);
+        gearShift = new Solenoid(Port.GEAR_SHIFT.GetPort());
+		talonRight= new Talon(Port.RIGHT_TALONS.GetPort());
+		talonLeft = new Talon(Port.LEFT_TALONS.GetPort());
 		joystickX = 0.0;
 		joystickY = 0.0;
 	}
@@ -51,41 +47,11 @@ public class DriveTrain {
     }
     
     /**
-     * Turns on the gearShift relay
-     */
-    public void gearShiftRelayOn()
-    {
-        gearShiftRelay.set(Relay.Value.kForward);
-    }
-
-    /**
-     * Gives the gearShift relay the value to reverse
-     */
-    public void gearShiftRelayReverse(){
-        gearShiftRelay.set(Relay.Value.kReverse);
-    }
-
-    /**
-     * Turns the gearShift relay off
-     */
-    public void gearShiftRelayOff() {
-        gearShiftRelay.set(Relay.Value.kOn);
-    }
-    
-    /**
-     * Gives the port number of the gearShift relay
-     * @return the port of the gearShift relay
-     */
-    public int getGearShiftRelayPort()
-    {
-        return GEAR_SHIFT_PORT;
-    }
-
-  /**
      * Turns the gearShift solenoid off
      */
     public void gearShiftSolenoidOff(){
         gearShift.set(false);
     }
+    
 }
 
