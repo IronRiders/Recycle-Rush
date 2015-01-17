@@ -26,7 +26,13 @@ public class DriveTrain {
 		talonRight.set(rightTalonSpeed);
 		talonLeft.set(leftTalonSpeed);
 	}
-	
+	public void stopRobot(){
+		setSpeed(0,0);
+	}
+	public void updateSpeedMethod(){
+		talonRight.set(Math.min((Math.max(-1, joystickY-joystickX)),1));
+		talonLeft.set(Math.min((Math.max(-1, joystickY+joystickX)),1));
+	}
 //    /**
 //     * Turns the gearShift solenoid on
 //     */
