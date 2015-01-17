@@ -3,6 +3,7 @@ package org.usfirst.frc.team4180.robot;
 import edu.wpi.first.wpilibj.Jaguar;
 
 public class Elevator {
+	private static boolean MOVING;
 	private Jaguar WINCH_JAGUAR;
 	private double JOYSTICK_Y;
 //    private static final int TEMP_PORT = 11;
@@ -20,6 +21,14 @@ public class Elevator {
 	
 	public void setSpeed(double speed){
 		WINCH_JAGUAR.set(speed);
+	}
+	
+	public void stopWinch() {
+		setSpeed(0);
+	}
+	
+	public boolean getMoving(){
+		return MOVING;
 	}
 
 //     /**
