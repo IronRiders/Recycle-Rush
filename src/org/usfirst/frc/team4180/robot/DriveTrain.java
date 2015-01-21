@@ -13,7 +13,7 @@ public class DriveTrain {
     private Solenoid gearShift;
 	
 	public DriveTrain(){
-        gearShift = new Solenoid(Port.GEAR_SHIFT.GetPort());
+        gearShift = new Solenoid(Port.PNEUMATIC_GEARBOX_SHIFTING.GetPort());
 		talonRight= new Talon(Port.RIGHT_TALONS.GetPort());
 		talonLeft = new Talon(Port.LEFT_TALONS.GetPort());
 		joystickX = 0.0;

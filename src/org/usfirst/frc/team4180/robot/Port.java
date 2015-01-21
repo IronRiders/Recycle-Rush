@@ -5,8 +5,6 @@ package org.usfirst.frc.team4180.robot;
 * @author Nate Spencer(A.K.A The Greatest)
 */
 public enum Port {
-	TEMP_PORT(7),
-	
 	JOYSTICK_ONE (0),
 	JOYSTICK_TWO(1),
 	
@@ -22,9 +20,7 @@ public enum Port {
 	ELEVATION_WINCH_JAGUAR (2),
 	
 	PNEUMATIC_GEARBOX_SHIFTING (0),
-	GRIPPER_PNEUMATIC_ACTUATOR (1),
-	
-	GEAR_SHIFT(Port.TEMP_PORT.GetPort());
+	GRIPPER_PNEUMATIC_ACTUATOR (1);
 
 	private int PORT_NUMBER;
 	Port(int portNumber){
