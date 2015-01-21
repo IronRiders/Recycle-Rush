@@ -23,6 +23,24 @@ public class Elevator {
 		WINCH_JAGUAR.set(speed);
 	}
 	
+	public void raiseArm(){
+		
+		
+	}
+	
+	public void lowerArm(){
+		
+		
+	}
+	
+	public void stop(){
+		
+		
+	}
+	
+	
+	
+	
 	public void stopWinch() {
 		setSpeed(0);
 	}

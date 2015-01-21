@@ -2,6 +2,7 @@
 package org.usfirst.frc.team4180.robot;
 
 import org.usfirst.frc.team4180.controls.Attack3Joystick;
+import org.usfirst.frc.team4180.listeners.Button2Listener;
 import org.usfirst.frc.team4180.listeners.MovementListener;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  */
 public class Robot extends IterativeRobot {
     private DriveTrain driveTrain; 
+    private Elevator elevator;
     private Attack3Joystick joystick1;
     private Attack3Joystick joystick2;
     private MovementListener movementListener;
@@ -24,12 +26,15 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	
+    	elevator = new Elevator();
     	driveTrain = new DriveTrain();
     	joystick1 = new Attack3Joystick(Port.JOYSTICK_ONE.GetPort());
     	joystick2 = new Attack3Joystick(Port.JOYSTICK_TWO.GetPort());
+    	
     	movementListener = new MovementListener(driveTrain);
+    	
     	joystick1.addJoystickListener(movementListener);
+    	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_2, new Button2Listener(elevator));
     }
 
     /**
