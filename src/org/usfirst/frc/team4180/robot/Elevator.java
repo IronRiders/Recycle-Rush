@@ -10,11 +10,12 @@ public class Elevator {
     private static final int TEMP_PORT = 11;
     private int GRIP_PORT = TEMP_PORT;
     private Solenoid grip;
+    private final double winchSpeed = 0.2;
 	
 	public Elevator(){
 		WINCH_JAGUAR= new Jaguar(2);
 		//JOYSRICK_Y = something;
-        grip = new Solenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR.GetPort());
+        grip = new Solenoid(Port.GRIP_PORT.GetPort());
 	}
 	
 	public void setSpeed(double speed){
@@ -22,22 +23,17 @@ public class Elevator {
 	}
 	
 	public void raiseArm(){
-		
-		
+		setSpeed(winchSpeed);
 	}
 	
 	public void lowerArm(){
-		
-		
+		setSpeed(-winchSpeed);
 	}
 	
 	public void stop(){
-		
-		
+		stopWinch();
 	}
-	
-	
-	
+
 	
 	public void stopWinch() {
 		setSpeed(0);
