@@ -15,7 +15,7 @@ public class Elevator {
 	public Elevator(){
 		WINCH_JAGUAR= new Jaguar(2);
 		//JOYSRICK_Y = something;
-        grip = new Solenoid(Port.GRIP_PORT.GetPort());
+        	grip = new Solenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR.GetPort());
 	}
 	
 	public void setSpeed(double speed){
