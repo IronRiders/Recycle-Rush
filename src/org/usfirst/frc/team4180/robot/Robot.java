@@ -2,9 +2,12 @@
 package org.usfirst.frc.team4180.robot;
 
 import org.usfirst.frc.team4180.controls.Attack3Joystick;
+import org.usfirst.frc.team4180.elevator.Elevator;
 import org.usfirst.frc.team4180.listeners.Button2Listener;
 import org.usfirst.frc.team4180.listeners.MovementListener;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -20,6 +23,7 @@ public class Robot extends IterativeRobot {
     private Attack3Joystick joystick1;
     private Attack3Joystick joystick2;
     private MovementListener movementListener;
+    //private AnalogInput holofexTest;
 	
 	/**
      * This function is run when the robot is first started up and should be
@@ -35,6 +39,8 @@ public class Robot extends IterativeRobot {
     	
     	joystick1.addJoystickListener(movementListener);
     	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_2, new Button2Listener(elevator));
+    	//holofexTest = new AnalogInput(0);
+    	//System.out.println("Aaron is butt da first time: " + holofexTest.getChannel());
     }
 
     /**
@@ -48,7 +54,8 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        joystick1.listen();
+    	joystick1.listen();
+    	//System.out.println("Aaron is a butt: " + holofexTest.getChannel());
     }
     
     public void teleopInit(){

@@ -1,4 +1,6 @@
-package org.usfirst.frc.team4180.robot;
+package org.usfirst.frc.team4180.elevator;
+
+import org.usfirst.frc.team4180.robot.Port;
 
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -8,7 +10,7 @@ public class Elevator {
 	private static boolean MOVING;
 	private Jaguar WINCH_JAGUAR;
 	private double JOYSTICK_Y;
-	private DigitalInput LIMIT_SWITCH_5 = new DigitalInput(Port.LEVEL_FIVE_LIMIT_SWITCH.GetPort());
+	//private DigitalInput LIMIT_SWITCH_5 = new DigitalInput(Port.LEVEL_FIVE_LIMIT_SWITCH.GetPort());
 	private DigitalInput LIMIT_SWITCH_0 = new DigitalInput(Port.LEVEL_ZERO_LIMIT_SWITCH.GetPort());
 	//This is defined here because: "Array constants can only be used in initializers" (error).
 	private DigitalInput[] LIMIT_SWITCH_ARRAY = {new DigitalInput(Port.LEVEL_ONE_LIMIT_SWITCH.GetPort()), 
@@ -65,9 +67,9 @@ public class Elevator {
 		}
 	}
 	
-	public void updateLimitSwitchFiveStatus() {
-		STATUS_OF_LVL_FIVE_SWITCH = LIMIT_SWITCH_5.get();
-	}
+//	public void updateLimitSwitchFiveStatus() {
+//		STATUS_OF_LVL_FIVE_SWITCH = LIMIT_SWITCH_5.get();
+//	}
 
     
     /**

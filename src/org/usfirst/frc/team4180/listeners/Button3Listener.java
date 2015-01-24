@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4180.listeners;
 
-import org.usfirst.frc.team4180.robot.Elevator;
+import org.usfirst.frc.team4180.elevator.Elevator;
 
 public class Button3Listener implements ButtonListener {
 	private Elevator elevator;
