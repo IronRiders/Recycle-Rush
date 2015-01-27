@@ -10,16 +10,13 @@ public class Elevator {
 	private static boolean MOVING;
 	private Jaguar WINCH_JAGUAR;
 	private double JOYSTICK_Y;
-	//private DigitalInput LIMIT_SWITCH_5 = new DigitalInput(Port.LEVEL_FIVE_LIMIT_SWITCH.GetPort());
-	private DigitalInput LIMIT_SWITCH_0 = new DigitalInput(Port.LEVEL_ZERO_LIMIT_SWITCH.GetPort());
+	private DigitalInput LIMIT_SWITCH_5 = new DigitalInput(Port.TOP_LIMIT_SWITCH.GetPort());
+	private DigitalInput LIMIT_SWITCH_0 = new DigitalInput(Port.BOTTOM_LIMIT_SWITCH.GetPort());
 	//This is defined here because: "Array constants can only be used in initializers" (error).
-	private DigitalInput[] LIMIT_SWITCH_ARRAY = {new DigitalInput(Port.LEVEL_ONE_LIMIT_SWITCH.GetPort()), 
-			new DigitalInput(Port.LEVEL_TWO_LIMIT_SWITCH.GetPort()),
-			new DigitalInput(Port.LEVEL_THREE_LIMIT_SWITCH.GetPort()),
-			new DigitalInput(Port.LEVEL_FOUR_LIMIT_SWITCH.GetPort())};
-	private boolean STATUS_OF_LVL_ZERO_SWITCH;
-	private boolean STATUS_OF_LVL_FIVE_SWITCH;
-	private boolean[] STATUS_OF_MID_SWITCHES_ARRAY = {false, false, false, false};
+
+	private boolean STATUS_OF_BOTTOM_SWITCH;
+	private boolean STATUS_OF_TOP_SWITCH;
+	//private boolean[] STATUS_OF_MID_SWITCHES_ARRAY = {false, false, false, false};
 
     //private static final int TEMP_PORT = 11;
     //private int GRIP_PORT = TEMP_PORT;
@@ -58,14 +55,14 @@ public class Elevator {
 	}
 	
 	public void updateLimitSwitchZeroStatus() {
-		STATUS_OF_LVL_ZERO_SWITCH = LIMIT_SWITCH_0.get();
+		STATUS_OF_BOTTOM_SWITCH = LIMIT_SWITCH_0.get();
 	}
 	
-	public void updateLimitSwitchArrayStatus() {
-		for(int y = 0; y < 4; y++) {
-			STATUS_OF_MID_SWITCHES_ARRAY[y] = LIMIT_SWITCH_ARRAY[y].get();
-		}
-	}
+//public void updateLimitSwitchArrayStatus() {
+		//for(int y = 0; y < 4; y++) {
+		//	STATUS_OF_MID_SWITCHES_ARRAY[y] = LIMIT_SWITCH_ARRAY[y].get();
+	//	}
+//	}
 	
 //	public void updateLimitSwitchFiveStatus() {
 //		STATUS_OF_LVL_FIVE_SWITCH = LIMIT_SWITCH_5.get();
