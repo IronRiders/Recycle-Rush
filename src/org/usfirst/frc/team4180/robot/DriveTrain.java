@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4180.robot;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
@@ -10,10 +11,10 @@ public class DriveTrain {
 	private Talon talonLeft;
 	private double joystickX;
 	private double joystickY;
-    private Solenoid gearShift;
+    private DoubleSolenoid gearShift;
 	
 	public DriveTrain(){
-		gearShift = new Solenoid(Port.PNEUMATIC_GEARBOX_SHIFTING.GetPort());
+		gearShift = new DoubleSolenoid(Port.PNEUMATIC_GEARBOX_SHIFTING_FORWARD.GetPort(), Port.PNEUMATIC_GEARBOX_SHIFTING_REVERSE.GetPort());
 		talonRight= new Talon(Port.RIGHT_TALONS.GetPort());
 		talonLeft = new Talon(Port.LEFT_TALONS.GetPort());
 		joystickX = 0.0;
@@ -43,14 +44,18 @@ public class DriveTrain {
      * Turns the gearShift solenoid on
      */
     public void gearShiftSolenoidOn(){
-        gearShift.set(true);
+        gearShift.set(DoubleSolenoid.Value.kForward);
     }
     
     /**
      * Turns the gearShift solenoid off
      */
     public void gearShiftSolenoidOff(){
-        gearShift.set(false);
+        gearShift.set(DoubleSolenoid.Value.kOff);
+    }
+    
+    public void gearShiftSolenoidReverse(){
+        gearShift.set(DoubleSolenoid.Value.kReverse);
     }
     
 }

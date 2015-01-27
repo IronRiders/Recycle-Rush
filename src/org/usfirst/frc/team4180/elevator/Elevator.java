@@ -2,6 +2,7 @@ package org.usfirst.frc.team4180.elevator;
 
 import org.usfirst.frc.team4180.robot.Port;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -20,13 +21,13 @@ public class Elevator {
 
     //private static final int TEMP_PORT = 11;
     //private int GRIP_PORT = TEMP_PORT;
-    private Solenoid grip;
+   private DoubleSolenoid grip;
     private final double winchSpeed = 0.2;
 	
 	public Elevator(){
 		WINCH_JAGUAR = new Jaguar(Port.ELEVATION_WINCH_JAGUAR.GetPort());
 		//JOYSRICK_Y = something;
-        grip = new Solenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR.GetPort());
+        grip = new DoubleSolenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR_FORWARD.GetPort(), Port.GRIPPER_PNEUMATIC_ACTUATOR_REVERSE.GetPort());
 	}
 	
 	public void setSpeed(double speed){
@@ -73,13 +74,17 @@ public class Elevator {
      * Turns the grip solenoid on
      */
     public void gripSolenoidOn(){
-        grip.set(true);
+        grip.set(DoubleSolenoid.Value.kForward);
     }
     
     /**
      * Turns the grip solenoid off
      */
     public void gripSolenoidOff(){
-        grip.set(false);
+        grip.set(DoubleSolenoid.Value.kOff);
+    }
+    
+    public void gripSolenoidReverse(){
+        grip.set(DoubleSolenoid.Value.kReverse);
     }
 }
