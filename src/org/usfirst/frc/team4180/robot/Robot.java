@@ -3,6 +3,7 @@ package org.usfirst.frc.team4180.robot;
 
 import org.usfirst.frc.team4180.controls.Attack3Joystick;
 import org.usfirst.frc.team4180.elevator.Elevator;
+import org.usfirst.frc.team4180.listeners.Button1Listener;
 import org.usfirst.frc.team4180.listeners.Button2Listener;
 import org.usfirst.frc.team4180.listeners.MovementListener;
 
@@ -23,6 +24,7 @@ public class Robot extends IterativeRobot {
     private Attack3Joystick joystick1;
     private Attack3Joystick joystick2;
     private MovementListener movementListener;
+    private Button1Listener button1Listener;
     //private AnalogInput holofexTest;
 	
 	/**
@@ -36,9 +38,11 @@ public class Robot extends IterativeRobot {
     	joystick2 = new Attack3Joystick(Port.JOYSTICK_TWO.GetPort());
     	
     	movementListener = new MovementListener(driveTrain);
+    	button1Listener = new Button1Listener(driveTrain);
     	
     	joystick1.addJoystickListener(movementListener);
-    	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_2, new Button2Listener(elevator));
+    	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_1, button1Listener);
+    	//joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_2, new Button2Listener(elevator));
     	//holofexTest = new AnalogInput(0);
     	//System.out.println("Aaron is butt da first time: " + holofexTest.getChannel());
     }

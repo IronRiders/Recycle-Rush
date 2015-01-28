@@ -12,9 +12,14 @@ public class DriveTrain {
 	private double joystickX;
 	private double joystickY;
     private DoubleSolenoid gearShift;
+    private Solenoid gearShift1;
+    private Solenoid gearShift2;
 	
 	public DriveTrain(){
 		gearShift = new DoubleSolenoid(Port.PNEUMATIC_GEARBOX_SHIFTING_FORWARD.GetPort(), Port.PNEUMATIC_GEARBOX_SHIFTING_REVERSE.GetPort());
+		//gearShift1 = new Solenoid(0);
+		//gearShift2 = new Solenoid(1);
+		//gearShift = new DoubleSolenoid(0, 1);
 		talonRight= new Talon(Port.RIGHT_TALONS.GetPort());
 		talonLeft = new Talon(Port.LEFT_TALONS.GetPort());
 		joystickX = 0.0;
@@ -29,8 +34,8 @@ public class DriveTrain {
 		setSpeed(0,0);
 	}
 	public void updateSpeed(){
-		talonRight.set(Math.min((Math.max(-1, joystickY-joystickX)),1));
-		talonLeft.set(Math.min((Math.max(-1, joystickY+joystickX)),1));
+		talonRight.set(-Math.min((Math.max(-1, joystickY+joystickX)),1));
+		talonLeft.set(Math.min((Math.max(-1, joystickY-joystickX)),1));
 	}
 	
     public void updateX(double newX){
@@ -45,6 +50,8 @@ public class DriveTrain {
      */
     public void gearShiftSolenoidOn(){
         gearShift.set(DoubleSolenoid.Value.kForward);
+    	//gearShift1.set(true);
+    	//gearShift2.set(true);
     }
     
     /**
@@ -52,6 +59,8 @@ public class DriveTrain {
      */
     public void gearShiftSolenoidOff(){
         gearShift.set(DoubleSolenoid.Value.kOff);
+    	//gearShift1.set(false);
+    	//gearShift2.set(false);
     }
     
     public void gearShiftSolenoidReverse(){
