@@ -2,10 +2,10 @@ package org.usfirst.frc.team4180.listeners;
 
 import org.usfirst.frc.team4180.robot.DriveTrain;
 
-public class Button1Listener implements ButtonListener{
+public class GearShiftButtonListener implements ButtonListener{
 	private DriveTrain driving;
 	
-	public Button1Listener(DriveTrain newDriveTrain){
+	public GearShiftButtonListener(DriveTrain newDriveTrain){
 		driving = newDriveTrain;
 	}
 	@Override

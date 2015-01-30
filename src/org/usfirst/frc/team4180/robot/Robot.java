@@ -1,15 +1,20 @@
 
 package org.usfirst.frc.team4180.robot;
 
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
 import org.usfirst.frc.team4180.controls.Attack3Joystick;
 import org.usfirst.frc.team4180.elevator.Elevator;
-import org.usfirst.frc.team4180.listeners.Button1Listener;
+import org.usfirst.frc.team4180.listeners.GearShiftButtonListener;
 import org.usfirst.frc.team4180.listeners.Button2Listener;
 import org.usfirst.frc.team4180.listeners.MovementListener;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,13 +24,13 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  * directory.
  */
 public class Robot extends IterativeRobot {
-    private DriveTrain driveTrain; 
+	private final int AUTONOMOUS_DELAY = 10;
+    public static DriveTrain driveTrain; 
     private Elevator elevator;
     private Attack3Joystick joystick1;
     private Attack3Joystick joystick2;
     private MovementListener movementListener;
-    private Button1Listener button1Listener;
-    //private AnalogInput holofexTest;
+    private GearShiftButtonListener button1Listener;
 	
 	/**
      * This function is run when the robot is first started up and should be
@@ -38,13 +43,10 @@ public class Robot extends IterativeRobot {
     	joystick2 = new Attack3Joystick(Port.JOYSTICK_TWO.GetPort());
     	
     	movementListener = new MovementListener(driveTrain);
-    	button1Listener = new Button1Listener(driveTrain);
+    	button1Listener = new GearShiftButtonListener(driveTrain);
     	
     	joystick1.addJoystickListener(movementListener);
     	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_1, button1Listener);
-    	//joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_2, new Button2Listener(elevator));
-    	//holofexTest = new AnalogInput(0);
-    	//System.out.println("Aaron is butt da first time: " + holofexTest.getChannel());
     }
 
     /**
@@ -59,7 +61,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	joystick1.listen();
-    	//System.out.println("Aaron is a butt: " + holofexTest.getChannel());
     }
     
     public void teleopInit(){
@@ -67,7 +68,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void autonomousInit(){
-    
+    	
     }
     
     public void disabledInit(){

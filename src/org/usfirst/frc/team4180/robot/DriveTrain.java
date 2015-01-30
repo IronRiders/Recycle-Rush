@@ -25,9 +25,13 @@ public class DriveTrain {
 		joystickX = 0.0;
 		joystickY = 0.0;
 	}
+	
+	public void setSpeed(double speed) {
+		setSpeed(speed,speed);
+	}
 		
 	public void setSpeed(double rightTalonSpeed, double leftTalonSpeed){
-		talonRight.set(rightTalonSpeed);
+		talonRight.set(-rightTalonSpeed);
 		talonLeft.set(leftTalonSpeed);
 	}
 	public void stopRobot(){

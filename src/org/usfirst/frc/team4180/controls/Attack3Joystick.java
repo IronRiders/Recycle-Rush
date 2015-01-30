@@ -5,13 +5,14 @@ import java.util.Hashtable;
 
 import org.usfirst.frc.team4180.listeners.ButtonListener;
 import org.usfirst.frc.team4180.listeners.JoystickListener;
+import org.usfirst.frc.team4180.robot.Robot;
 
 public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
     
-    private Hashtable<Button,ArrayList<ButtonListener>> BUTTON_LISTENERES;
+    private Hashtable<Button,ArrayList<ButtonListener>> BUTTON_LISTENERS;
     private ArrayList<JoystickListener> JOYSTICK_LISTENERS;
     private Thread[] THREADS;
-    private Hashtable STATE;
+    private Hashtable<Button,Boolean> STATE;
     public static final Button[] BUTTONS = new Button[] {
         Button.BUTTON_1,  
         Button.BUTTON_2,  
@@ -29,26 +30,24 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
         super(port);
         THREADS = new Thread[BUTTONS.length];
         JOYSTICK_LISTENERS = new ArrayList<JoystickListener>();
-        BUTTON_LISTENERES = new Hashtable();
-        STATE = new Hashtable();
+        BUTTON_LISTENERS = new Hashtable<Button,ArrayList<ButtonListener>>();
+        STATE = new Hashtable<Button,Boolean>();
     }
         
     public void listen() {
         for (int i = 0; i < BUTTONS.length; i++) {
-            final Button button = BUTTONS[i];
+           Button button = BUTTONS[i];
             
-            final Boolean isPressed = Boolean.valueOf(getRawButton(button.getButtonNumber()));
+            boolean isPressed = Boolean.valueOf(getRawButton(button.getButtonNumber()));
             
-            final Boolean wasPressed;
-            if(((Boolean)STATE.get(button)) == null){
-                wasPressed = Boolean.valueOf(!isPressed.booleanValue());
+            boolean wasPressed;
+            if(STATE.get(button) == null) {
+                wasPressed = Boolean.valueOf(!isPressed);
+            } else {
+                wasPressed = STATE.get(button);
             }
-            else{
-                wasPressed = ((Boolean)STATE.get(button));
-            }
             
-           
-                        notifyButtonListeners(button, isPressed.booleanValue(), wasPressed.booleanValue());
+           notifyButtonListeners(button, isPressed, wasPressed);
             
             STATE.put(button, isPressed);
         }
@@ -58,33 +57,32 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
     } 
     
     public void addButtonListener(Button button, ButtonListener listener) {
-        if (!BUTTON_LISTENERES.contains(button)) {
-            BUTTON_LISTENERES.put(button, new ArrayList<ButtonListener>());
+        if (!BUTTON_LISTENERS.contains(button)) {
+        	
+            BUTTON_LISTENERS.put(button, new ArrayList<ButtonListener>());
         }
         
-        BUTTON_LISTENERES.get(button).add(listener);
+        BUTTON_LISTENERS.get(button).add(listener);
     }
     
     public void addButtonListener(Button[] buttons, ButtonListener listener){
-        for(int i = 0; i < buttons.length; i++){
-            addButtonListener(buttons[i], listener);
-            
+        for(int count = 0; count < buttons.length; count++){
+            addButtonListener(buttons[count], listener);
         }
     }
            
     private void notifyButtonListeners(Button button, boolean isPressed, boolean wasPressed ) {
-        ArrayList<ButtonListener> listeners = BUTTON_LISTENERES.get(button);
+        ArrayList<ButtonListener> listeners = BUTTON_LISTENERS.get(button);
         if(listeners != null) {
         	if (isPressed && !wasPressed) {
                 for (int count = 0; count < listeners.size(); count++){
-                    ButtonListener bl = (ButtonListener)listeners.get(count);
-                     
+                    ButtonListener buttonListener = listeners.get(count); //count);
+                    buttonListener.buttonDown();
                 }
-            }
-            else if (!isPressed && wasPressed) {
+            } else if (!isPressed && wasPressed) {
                 for (int count = 0; count < listeners.size(); count++){
-                    ButtonListener bl = (ButtonListener)listeners.get(count);
-                 
+                    ButtonListener buttonListener = listeners.get(count);
+                    buttonListener.buttonUp();
                 }
             }
         }

@@ -12,10 +12,10 @@ public class MovementListener implements JoystickListener {
 	@Override
 	public void joystickMoved(double x, double y, double z) {
 		// TODO Auto-generated method stub
-//		if(x == 0 || y == 0){
-			System.out.println("MovementListener: x = " + x);
-			System.out.println("MovementListener: y = " + y);
-//		}
+////		if(x == 0 || y == 0){
+//			System.out.println("MovementListener: x = " + x);
+//			System.out.println("MovementListener: y = " + y);
+////		}
         driveTrain.updateX(x);
         driveTrain.updateY(y);
         driveTrain.updateSpeed();
