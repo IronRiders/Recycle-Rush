@@ -10,7 +10,7 @@ public class GearShiftButtonListener implements ButtonListener{
 	}
 	@Override
 	public void buttonDown(){
-		driving.gearShiftSolenoidOn();
+ 		driving.gearShiftSolenoidOn();
 	}
 	@Override
 	public void buttonUp(){

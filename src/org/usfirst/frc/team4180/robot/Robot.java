@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void teleopInit(){
-    	
+    	driveTrain.gearShiftSolenoidOn();
     }
     
     public void autonomousInit(){
