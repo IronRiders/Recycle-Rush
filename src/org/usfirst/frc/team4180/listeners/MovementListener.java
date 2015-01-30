@@ -16,10 +16,10 @@ public class MovementListener implements JoystickListener {
 //			System.out.println("MovementListener: x = " + x);
 //			System.out.println("MovementListener: y = " + y);
 ////		}
-		if((y < .05 && y > 0) || (y > -.05 && y < 0)){
+		if(y > -.05 && y < .05){
 			y = 0;
 		}
-		if((x < .05 && x > 0) || (x > -.05 && x < 0)){
+		if(x > -.05 && x < .05){
 			x = 0;
 		}
         driveTrain.updateX(x);
