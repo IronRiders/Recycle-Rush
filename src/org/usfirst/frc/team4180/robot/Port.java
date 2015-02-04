@@ -2,7 +2,7 @@ package org.usfirst.frc.team4180.robot;
 
 /**
 *
-* @author Nate Spencer(A.K.A The Greatest)
+* @author Nate Spencer(A.K.A The Worstest)
 */
 public enum Port {
 	JOYSTICK_ONE (0),
@@ -18,7 +18,10 @@ public enum Port {
 	PNEUMATIC_GEARBOX_SHIFTING_FORWARD (0),
 	PNEUMATIC_GEARBOX_SHIFTING_REVERSE (1),
 	GRIPPER_PNEUMATIC_ACTUATOR_FORWARD (2),
-	GRIPPER_PNEUMATIC_ACTUATOR_REVERSE (3);
+	GRIPPER_PNEUMATIC_ACTUATOR_REVERSE (3),
+	
+	AUTO_SWITCH_1 (9),
+	AUTO_SWITCH_2 (8);
 	
 
 	private int PORT_NUMBER;

@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 
 import org.usfirst.frc.team4180.controls.Attack3Joystick;
 import org.usfirst.frc.team4180.elevator.Elevator;
+import org.usfirst.frc.team4180.listeners.ElevationListener;
 import org.usfirst.frc.team4180.listeners.GearShiftButtonListener;
 import org.usfirst.frc.team4180.listeners.Button2Listener;
 import org.usfirst.frc.team4180.listeners.MovementListener;
@@ -31,6 +32,10 @@ public class Robot extends IterativeRobot {
     private Attack3Joystick joystick2;
     private MovementListener movementListener;
     private GearShiftButtonListener button1Listener;
+    private ElevationListener elevationListener;
+    private DigitalInput autoSwitch1 = new DigitalInput(Port.AUTO_SWITCH_1.GetPort());
+    private DigitalInput autoSwitch2 = new DigitalInput(Port.AUTO_SWITCH_2.GetPort());
+    
 	
 	/**
      * This function is run when the robot is first started up and should be
@@ -42,18 +47,20 @@ public class Robot extends IterativeRobot {
     	joystick1 = new Attack3Joystick(Port.JOYSTICK_ONE.GetPort());
     	joystick2 = new Attack3Joystick(Port.JOYSTICK_TWO.GetPort());
     	
-    	movementListener = new MovementListener(driveTrain);
-    	button1Listener = new GearShiftButtonListener(driveTrain);
+//    	movementListener = new MovementListener(driveTrain);
+//    	button1Listener = new GearShiftButtonListener(driveTrain);
+    	elevationListener = new ElevationListener(elevator);
     	
-    	joystick1.addJoystickListener(movementListener);
-    	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_1, button1Listener);
+//    	joystick1.addJoystickListener(movementListener);
+//    	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_1, button1Listener);
+    	joystick2.addJoystickListener(elevationListener);
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-
+ 	
     }
 
     /**
@@ -61,14 +68,28 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	joystick1.listen();
+    	joystick2.listen();
+    	elevator.updateLimitSwitches();
     }
     
     public void teleopInit(){
-    	driveTrain.gearShiftSolenoidOn();
+//    	driveTrain.gearShiftSolenoidOn();
     }
     
     public void autonomousInit(){
-    	
+    	if(autoSwitch1.get() && autoSwitch2.get()) {
+    		//enable autonomous
+    		//mode 1
+    	} else if(autoSwitch1.get() && !autoSwitch2.get()) {
+    		//enable autonomous
+    		//mode 2
+    	} else if(!autoSwitch1.get() && autoSwitch2.get()) {
+    		//enable autonomous
+    		//mode 3
+    	} else {
+    		//disable autonomous
+    		//mode 4
+    	}
     }
     
     public void disabledInit(){
