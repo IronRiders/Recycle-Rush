@@ -33,9 +33,6 @@ public class Robot extends IterativeRobot {
     private MovementListener movementListener;
     private GearShiftButtonListener button1Listener;
     private ElevationListener elevationListener;
-    private DigitalInput autoSwitch1 = new DigitalInput(Port.AUTO_SWITCH_1.GetPort());
-    private DigitalInput autoSwitch2 = new DigitalInput(Port.AUTO_SWITCH_2.GetPort());
-    
 	
 	/**
      * This function is run when the robot is first started up and should be
@@ -77,19 +74,7 @@ public class Robot extends IterativeRobot {
     }
     
     public void autonomousInit(){
-    	if(autoSwitch1.get() && autoSwitch2.get()) {
-    		//enable autonomous
-    		//mode 1
-    	} else if(autoSwitch1.get() && !autoSwitch2.get()) {
-    		//enable autonomous
-    		//mode 2
-    	} else if(!autoSwitch1.get() && autoSwitch2.get()) {
-    		//enable autonomous
-    		//mode 3
-    	} else {
-    		//disable autonomous
-    		//mode 4
-    	}
+    	
     }
     
     public void disabledInit(){

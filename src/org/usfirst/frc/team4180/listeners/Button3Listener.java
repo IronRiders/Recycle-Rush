@@ -17,7 +17,7 @@ public class Button3Listener implements ButtonListener {
 
 	@Override
 	public void buttonUp() {
-		elevator.stop();
+		elevator.stopWinch();
 		
 	}
 

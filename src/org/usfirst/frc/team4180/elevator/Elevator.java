@@ -11,22 +11,17 @@ public class Elevator {
 	private static boolean MOVING;
 	private Jaguar WINCH_JAGUAR;
 	private double JOYSTICK_Y;
-	private DigitalInput LIMIT_SWITCH_5 = new DigitalInput(Port.TOP_LIMIT_SWITCH.GetPort());
-	private DigitalInput LIMIT_SWITCH_0 = new DigitalInput(Port.BOTTOM_LIMIT_SWITCH.GetPort());
-	//This is defined here because: "Array constants can only be used in initializers" (error).
+	private DigitalInput LIMIT_SWITCH_TOP = new DigitalInput(Port.TOP_LIMIT_SWITCH.GetPort());
+	private DigitalInput LIMIT_SWITCH_BOTTOM = new DigitalInput(Port.BOTTOM_LIMIT_SWITCH.GetPort());
 
 	private boolean STATUS_OF_BOTTOM_SWITCH;
 	private boolean STATUS_OF_TOP_SWITCH;
-	//private boolean[] STATUS_OF_MID_SWITCHES_ARRAY = {false, false, false, false};
 
-    //private static final int TEMP_PORT = 11;
-    //private int GRIP_PORT = TEMP_PORT;
    private DoubleSolenoid grip;
     private final double winchSpeed = 0.2;
 	
 	public Elevator(){
 		WINCH_JAGUAR = new Jaguar(Port.ELEVATION_WINCH_JAGUAR.GetPort());
-		//JOYSRICK_Y = something;
         grip = new DoubleSolenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR_FORWARD.GetPort(), Port.GRIPPER_PNEUMATIC_ACTUATOR_REVERSE.GetPort());
 	}
 	
@@ -42,11 +37,7 @@ public class Elevator {
 		setSpeed(-winchSpeed);
 	}
 	
-	public void stop(){
-		stopWinch();
-	}
 
-	
 	public void stopWinch() {
 		setSpeed(0);
 	}
@@ -55,22 +46,22 @@ public class Elevator {
 		return MOVING;
 	}
 	
-	public void updateLimitSwitchZeroStatus() {
-		STATUS_OF_BOTTOM_SWITCH = LIMIT_SWITCH_0.get();
-	}
-	
-//public void updateLimitSwitchArrayStatus() {
-		//for(int y = 0; y < 4; y++) {
-		//	STATUS_OF_MID_SWITCHES_ARRAY[y] = LIMIT_SWITCH_ARRAY[y].get();
-	//	}
-//	}
-	
-//	public void updateLimitSwitchFiveStatus() {
-//		STATUS_OF_LVL_FIVE_SWITCH = LIMIT_SWITCH_5.get();
-//	}
+	public void updateLimitSwitches() {
+		STATUS_OF_BOTTOM_SWITCH = LIMIT_SWITCH_BOTTOM.get();
+		STATUS_OF_TOP_SWITCH = LIMIT_SWITCH_TOP.get();
 
-    
-    /**
+		if(STATUS_OF_BOTTOM_SWITCH) {
+			raiseArm();
+			updateLimitSwitches();
+		} else if(STATUS_OF_TOP_SWITCH) {
+			lowerArm();
+			updateLimitSwitches();
+		} else {
+			stopWinch();
+		}
+	}
+
+	/**
      * Turns the grip solenoid on
      */
     public void gripSolenoidOn(){
