@@ -27,7 +27,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class Robot extends IterativeRobot {
 	private final int AUTONOMOUS_DELAY = 10;
     public static DriveTrain driveTrain; 
-    private Elevator elevator;
+    public static Elevator elevator;
     private Attack3Joystick joystick1;
     private Attack3Joystick joystick2;
     private MovementListener movementListener;

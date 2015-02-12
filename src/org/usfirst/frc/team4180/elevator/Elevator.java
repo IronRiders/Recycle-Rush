@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Elevator {
 	private static boolean MOVING;
-	private Jaguar WINCH_JAGUAR;
+	private static Jaguar WINCH_JAGUAR;
 	private double JOYSTICK_Y;
 	private DigitalInput LIMIT_SWITCH_TOP = new DigitalInput(Port.TOP_LIMIT_SWITCH.GetPort());
 	private DigitalInput LIMIT_SWITCH_BOTTOM = new DigitalInput(Port.BOTTOM_LIMIT_SWITCH.GetPort());
@@ -17,8 +17,8 @@ public class Elevator {
 	private boolean STATUS_OF_BOTTOM_SWITCH;
 	private boolean STATUS_OF_TOP_SWITCH;
 
-   private DoubleSolenoid grip;
-    private final double winchSpeed = 0.2;
+   private static DoubleSolenoid grip;
+    private final static double winchSpeed = 0.2;
 	
     /**
      * The constructor for the Elevator class which controls the elevator on the robot
@@ -32,14 +32,14 @@ public class Elevator {
     /**
      * Gives the Jaguar the value for speed
      */
- 	public void setSpeed(double speed){
+ 	public static void setSpeed(double speed){
 		WINCH_JAGUAR.set(speed);
 	}
 	
     /**
      * calls setSpeed and sends it to the correct speed
      */
- 	public void raiseArm(){
+ 	public static void raiseArm(){
 		setSpeed(winchSpeed);
 	}
 	
@@ -54,7 +54,7 @@ public class Elevator {
     /**
      * calls setSpeed and sends it to 0
      */
- 	public void stopWinch() {
+ 	public static void stopWinch() {
 		setSpeed(0);
 	}
 	
@@ -84,14 +84,14 @@ public class Elevator {
 	/**
      * Turns the grip solenoid on
      */
-    public void gripSolenoidOn(){
+    public static void gripSolenoidOn(){
         grip.set(DoubleSolenoid.Value.kForward);
     }
     
     /**
      * Turns the grip solenoid off
      */
-    public void gripSolenoidOff(){
+    public static void gripSolenoidOff(){
         grip.set(DoubleSolenoid.Value.kOff);
     }
     
