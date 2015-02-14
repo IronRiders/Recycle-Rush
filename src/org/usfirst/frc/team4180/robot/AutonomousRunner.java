@@ -9,7 +9,6 @@ public class AutonomousRunner {
     private DigitalInput AUTO_SWITCH_1 = new DigitalInput(Port.AUTO_SWITCH_1.GetPort());
     private DigitalInput AUTO_SWITCH_2 = new DigitalInput(Port.AUTO_SWITCH_2.GetPort());
     private double autonomousSpeed; 
-    private Timer timer = new Timer();
     
     public AutonomousRunner() {
     	
@@ -31,7 +30,7 @@ public class AutonomousRunner {
 //    	start in starting zone
 //    	drive into auto zone
     	Robot.driveTrain.setSpeed(autonomousSpeed);
-    	timer.delay(5); //TODO: test for delay
+    	Timer.delay(5); //TODO: test for delay
     	Robot.driveTrain.stopRobot();
     	
     }
@@ -41,16 +40,16 @@ public class AutonomousRunner {
 //    	pick up tote, rotate
 //    	drive to autozone
     	Robot.elevator.gripSolenoidOn();
-    	timer.delay(5);	//TODO: test for delay
+    	Timer.delay(5);	//TODO: test for delay
     	Robot.elevator.gripSolenoidOff();
     	Robot.elevator.raiseArm();
-    	timer.delay(5); //TODO: test for delay
+    	Timer.delay(5); //TODO: test for delay
     	Robot.elevator.stopWinch();
     	Robot.driveTrain.setSpeed(0.5, 0.5); //TODO: to be tested
-    	timer.delay(5); //TODO: test for delay
+    	Timer.delay(5); //TODO: test for delay
     	Robot.driveTrain.stopRobot();
     	Robot.driveTrain.setSpeed(autonomousSpeed);
-    	timer.delay(5); //TODO: test for delay
+    	Timer.delay(5); //TODO: test for delay
     	Robot.driveTrain.stopRobot();
     }
     
@@ -59,16 +58,16 @@ public class AutonomousRunner {
 //    	pick up bin, rotate
 //    	drive to autozone
     	Robot.elevator.gripSolenoidOn();
-    	timer.delay(5);	//TODO: test for delay
+    	Timer.delay(5);	//TODO: test for delay
     	Robot.elevator.gripSolenoidOff();
     	Robot.elevator.raiseArm();
-    	timer.delay(5); //TODO: test for delay
+    	Timer.delay(5); //TODO: test for delay
     	Robot.elevator.stopWinch();
     	Robot.driveTrain.setSpeed(0.5, 0.5); //TODO: to be tested
-    	timer.delay(5); //TODO: test for delay
+    	Timer.delay(5); //TODO: test for delay
     	Robot.driveTrain.stopRobot();
     	Robot.driveTrain.setSpeed(autonomousSpeed);
-    	timer.delay(5); //TODO: test for delay
+    	Timer.delay(5); //TODO: test for delay
     	Robot.driveTrain.stopRobot();
     } 
     
