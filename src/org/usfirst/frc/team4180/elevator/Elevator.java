@@ -3,14 +3,12 @@ package org.usfirst.frc.team4180.elevator;
 import org.usfirst.frc.team4180.robot.Port;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Jaguar;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Elevator {
 	private static boolean MOVING;
-	private static Jaguar WINCH_JAGUAR;
-	private double JOYSTICK_Y;
+	private static Talon WINCH_TALON;
 	private DigitalInput LIMIT_SWITCH_TOP = new DigitalInput(Port.TOP_LIMIT_SWITCH.GetPort());
 	private DigitalInput LIMIT_SWITCH_BOTTOM = new DigitalInput(Port.BOTTOM_LIMIT_SWITCH.GetPort());
 
@@ -25,21 +23,21 @@ public class Elevator {
      * It assigns the ports for the elevation solenoid and the Jaguar.
      */
     public Elevator(){
-		WINCH_JAGUAR = new Jaguar(Port.ELEVATION_WINCH_JAGUAR.GetPort());
+		WINCH_TALON = new Talon(Port.ELEVATION_WINCH_TALON.GetPort());
         grip = new DoubleSolenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR_FORWARD.GetPort(), Port.GRIPPER_PNEUMATIC_ACTUATOR_REVERSE.GetPort());
 	}
 	
     /**
      * Gives the Jaguar the value for speed
      */
- 	public static void setSpeed(double speed){
-		WINCH_JAGUAR.set(speed);
+ 	public void setSpeed(double speed){
+		WINCH_TALON.set(speed);
 	}
 	
     /**
      * calls setSpeed and sends it to the correct speed
      */
- 	public static void raiseArm(){
+ 	public void raiseArm(){
 		setSpeed(winchSpeed);
 	}
 	
@@ -54,7 +52,7 @@ public class Elevator {
     /**
      * calls setSpeed and sends it to 0
      */
- 	public static void stopWinch() {
+ 	public void stopWinch() {
 		setSpeed(0);
 	}
 	
@@ -72,10 +70,8 @@ public class Elevator {
 
 		if(STATUS_OF_BOTTOM_SWITCH) {
 			raiseArm();
-			updateLimitSwitches();
 		} else if(STATUS_OF_TOP_SWITCH) {
 			lowerArm();
-			updateLimitSwitches();
 		} else {
 			stopWinch();
 		}
@@ -84,14 +80,16 @@ public class Elevator {
 	/**
      * Turns the grip solenoid on
      */
-    public static void gripSolenoidOn(){
+    public void gripSolenoidOn() {
+    	System.out.println("  -GripSolenoidOn");
         grip.set(DoubleSolenoid.Value.kForward);
     }
     
     /**
      * Turns the grip solenoid off
      */
-    public static void gripSolenoidOff(){
+    public void gripSolenoidOff() {
+    	System.out.println("  -GripSolenoidOff");
         grip.set(DoubleSolenoid.Value.kOff);
     }
     
