@@ -34,12 +34,16 @@ public class DriveTrain {
 		talonRight.set(-rightTalonSpeed);
 		talonLeft.set(leftTalonSpeed);
 	}
+	
 	public void stopRobot(){
 		setSpeed(0,0);
 	}
+	
 	public void updateSpeed(){
-		talonRight.set(-Math.min((Math.max(-1, joystickY+joystickX)),1));
-		talonLeft.set(Math.min((Math.max(-1, joystickY-joystickX)),1));
+		setSpeed(
+				Math.min((Math.max(-1, joystickY+joystickX)),1), 
+				Math.min((Math.max(-1, joystickY-joystickX)),1)
+		);
 	}
 	
     public void updateX(double newX){
@@ -49,9 +53,11 @@ public class DriveTrain {
     public void updateY(double newY){
     	joystickY = newY;
     }
+    
     /**
      * Turns the gearShift solenoid on
      */
+    
     public void gearShiftSolenoidOn(){
         gearShift.set(DoubleSolenoid.Value.kForward);
     	//gearShift1.set(true);
@@ -61,6 +67,7 @@ public class DriveTrain {
     /**
      * Turns the gearShift solenoid off
      */
+    
     public void gearShiftSolenoidOff(){
         gearShift.set(DoubleSolenoid.Value.kOff);
     	//gearShift1.set(false);

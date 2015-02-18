@@ -8,10 +8,13 @@ import edu.wpi.first.wpilibj.Timer;
 public class AutonomousRunner {
     private DigitalInput AUTO_SWITCH_1 = new DigitalInput(Port.AUTO_SWITCH_1.GetPort());
     private DigitalInput AUTO_SWITCH_2 = new DigitalInput(Port.AUTO_SWITCH_2.GetPort());
-    private double autonomousSpeed; 
+    private static double autonomousSpeed;
+    private DriveTrain driveTrain;
+    private Elevator elevator;
     
-    public AutonomousRunner() {
-    	
+    public AutonomousRunner(DriveTrain driveTrain, Elevator elevator) {
+    	this.elevator = elevator;
+    	this.driveTrain = driveTrain;
     	boolean switchOneValue = AUTO_SWITCH_1.get();
     	boolean switchTwoValue = AUTO_SWITCH_2.get();
     	if(switchOneValue && switchTwoValue) {
@@ -23,55 +26,52 @@ public class AutonomousRunner {
     	} else {
     		disableAutonomous();
     	}
-    	autonomousSpeed = 0.5; //TODO: to be tested
+    	autonomousSpeed = 0.3;
     }
     
-    private void driveToAutoZone() {
+    public void driveToAutoZone() {
 //    	start in starting zone
 //    	drive into auto zone
-    	Robot.driveTrain.setSpeed(autonomousSpeed);
-    	Timer.delay(5); //TODO: test for delay
-    	Robot.driveTrain.stopRobot();
+    	driveTrain.setSpeed(-autonomousSpeed);
+    	Timer.delay(3); //TODO: test for delay
+    	driveTrain.stopRobot();
     	
     }
     
-    private void moveToteToAutoZone() {
+    public void moveToteToAutoZone() {
 //    	start facing tote
 //    	pick up tote, rotate
 //    	drive to autozone
-    	Robot.elevator.gripSolenoidOn();
-    	Timer.delay(5);	//TODO: test for delay
-    	Robot.elevator.gripSolenoidOff();
-    	Robot.elevator.raiseArm();
-    	Timer.delay(5); //TODO: test for delay
-    	Robot.elevator.stopWinch();
-    	Robot.driveTrain.setSpeed(0.5, 0.5); //TODO: to be tested
-    	Timer.delay(5); //TODO: test for delay
-    	Robot.driveTrain.stopRobot();
-    	Robot.driveTrain.setSpeed(autonomousSpeed);
-    	Timer.delay(5); //TODO: test for delay
-    	Robot.driveTrain.stopRobot();
+    	elevator.gripSolenoidOn();
+    	Timer.delay(1.5);
+    	elevator.setSpeed(-.75);;
+    	Timer.delay(2); //TODO: test for delay
+    	elevator.stopWinch(); // change this after holding point is established
+    	driveTrain.setSpeed(-0.5, -0.5); //TODO: to be tested
+    	Timer.delay(0.35); //TODO: test for delay
+    	driveTrain.setSpeed(-autonomousSpeed);
+    	Timer.delay(4); //TODO: test for delay
+    	//driveTrain.stopRobot();
     }
     
-    private void moveBinToAutoZone() {
+    public void moveBinToAutoZone() {
 //    	start facing bin
 //    	pick up bin, rotate
 //    	drive to autozone
-    	Robot.elevator.gripSolenoidOn();
-    	Timer.delay(5);	//TODO: test for delay
-    	Robot.elevator.gripSolenoidOff();
-    	Robot.elevator.raiseArm();
-    	Timer.delay(5); //TODO: test for delay
-    	Robot.elevator.stopWinch();
-    	Robot.driveTrain.setSpeed(0.5, 0.5); //TODO: to be tested
-    	Timer.delay(5); //TODO: test for delay
-    	Robot.driveTrain.stopRobot();
-    	Robot.driveTrain.setSpeed(autonomousSpeed);
-    	Timer.delay(5); //TODO: test for delay
-    	Robot.driveTrain.stopRobot();
+    	elevator.gripSolenoidOn();
+    	Timer.delay(1.5);
+    	elevator.setSpeed(-.75);
+    	Timer.delay(1.5); //TODO: test for delay
+    	elevator.stopWinch(); // change this after holding point is established
+    	elevator.setSpeed(Robot.ELEVATOR_HOLD_POSITION_SPEED);
+    	driveTrain.setSpeed(-0.5, 0.5); //TODO: to be tested turning
+    	Timer.delay(1); //TODO: test for delay
+    	driveTrain.setSpeed(-autonomousSpeed);
+    	Timer.delay(3); //TODO: test for delay
+    	driveTrain.stopRobot();
     } 
     
-    private void disableAutonomous() {
+    public void disableAutonomous() {
     	
     }
 }

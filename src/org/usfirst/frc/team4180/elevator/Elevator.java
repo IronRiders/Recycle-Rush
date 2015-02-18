@@ -3,12 +3,12 @@ package org.usfirst.frc.team4180.elevator;
 import org.usfirst.frc.team4180.robot.Port;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class Elevator {
 	private static boolean MOVING;
-	private static Talon WINCH_TALON;
+	private static Jaguar WINCH_JAGUAR;
 	private DigitalInput LIMIT_SWITCH_TOP = new DigitalInput(Port.TOP_LIMIT_SWITCH.GetPort());
 	private DigitalInput LIMIT_SWITCH_BOTTOM = new DigitalInput(Port.BOTTOM_LIMIT_SWITCH.GetPort());
 
@@ -23,7 +23,7 @@ public class Elevator {
      * It assigns the ports for the elevation solenoid and the Jaguar.
      */
     public Elevator(){
-		WINCH_TALON = new Talon(Port.ELEVATION_WINCH_TALON.GetPort());
+		WINCH_JAGUAR = new Jaguar(Port.ELEVATION_WINCH_JAGUAR.GetPort());
         grip = new DoubleSolenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR_FORWARD.GetPort(), Port.GRIPPER_PNEUMATIC_ACTUATOR_REVERSE.GetPort());
 	}
 	
@@ -31,7 +31,10 @@ public class Elevator {
      * Gives the Jaguar the value for speed
      */
  	public void setSpeed(double speed){
-		WINCH_TALON.set(speed);
+ 		System.out.println("ss = " + speed);
+		WINCH_JAGUAR.set(speed);
+		//double random = WINCH_JAGUAR.get();
+		//WINCH_JAGUAR.set(random);
 	}
 	
     /**
