@@ -9,12 +9,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class Elevator {
 	private static boolean MOVING;
 	private static Jaguar WINCH_JAGUAR;
-	private DigitalInput LIMIT_SWITCH_TOP = new DigitalInput(Port.TOP_LIMIT_SWITCH.GetPort());
-	private DigitalInput LIMIT_SWITCH_BOTTOM = new DigitalInput(Port.BOTTOM_LIMIT_SWITCH.GetPort());
-
-	private boolean STATUS_OF_BOTTOM_SWITCH;
-	private boolean STATUS_OF_TOP_SWITCH;
-
    private static DoubleSolenoid grip;
     private final static double winchSpeed = 0.2;
 	
@@ -67,18 +61,6 @@ public class Elevator {
 	}
 	
 //  	REQUIRES COMMENTS----------------------------------------------------------------------
-	public void updateLimitSwitches() {
-		STATUS_OF_BOTTOM_SWITCH = LIMIT_SWITCH_BOTTOM.get();
-		STATUS_OF_TOP_SWITCH = LIMIT_SWITCH_TOP.get();
-
-		if(STATUS_OF_BOTTOM_SWITCH) {
-			raiseArm();
-		} else if(STATUS_OF_TOP_SWITCH) {
-			lowerArm();
-		} else {
-			stopWinch();
-		}
-	}
 
 	/**
      * Turns the grip solenoid on
