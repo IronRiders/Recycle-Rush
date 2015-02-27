@@ -1,10 +1,10 @@
 package org.usfirst.frc.team4180.elevator;
 
 
-public class MiddleLimitSwitch implements LimitSwitchListener {
+public class TopLimitSwitch implements LimitSwitchListener {
 	private Elevator ELEVATOR = new Elevator();
 	
-	public MiddleLimitSwitch() {
+	public TopLimitSwitch() {
 
 	}
 	
