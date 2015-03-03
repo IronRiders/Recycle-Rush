@@ -24,9 +24,9 @@ public class ElevationListener implements JoystickListener {
 		System.out.println("BottomSwitch: " + BOTTOM_LIMIT_SWITCH.get());
 		System.out.println("TopSwitch:    " + TOP_LIMIT_SWITCH.get());
 
-		if(BOTTOM_LIMIT_SWITCH.get()) {
+		if(!BOTTOM_LIMIT_SWITCH.get()) {
 			elevator.raiseArm();
-		} else if(TOP_LIMIT_SWITCH.get()) {
+		} else if(!TOP_LIMIT_SWITCH.get()) {
 			elevator.lowerArm();
 		} else {
 			if(y < .05 && y > -.05) {

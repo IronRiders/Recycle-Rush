@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 
 import org.usfirst.frc.team4180.controls.Attack3Joystick;
 import org.usfirst.frc.team4180.elevator.Elevator;
+import org.usfirst.frc.team4180.listeners.BinArmButtonListener;
 import org.usfirst.frc.team4180.listeners.ElevationListener;
 import org.usfirst.frc.team4180.listeners.ElevatorSolenoidListener;
 import org.usfirst.frc.team4180.listeners.GearShiftButtonListener;
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	private final int AUTONOMOUS_DELAY = 10;
 	public static final double ELEVATOR_HOLD_POSITION_SPEED = -.2;
     public DriveTrain driveTrain; 
+    public BinArm binArm;
     public Elevator elevator;
     private Attack3Joystick joystick1;
     private Attack3Joystick joystick2;
@@ -37,6 +39,7 @@ public class Robot extends IterativeRobot {
     private GearShiftButtonListener button1Listener;
     private ElevatorSolenoidListener elevatorSolenoidListener;
     private ElevationListener elevationListener;
+    private BinArmButtonListener binArmListener;
     private AutonomousRunner autonomousRunner;
 	
 	/**
@@ -46,6 +49,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	elevator = new Elevator();
     	driveTrain = new DriveTrain();
+    	binArm = new BinArm();
     	autonomousRunner = new AutonomousRunner(driveTrain, elevator);
     	joystick1 = new Attack3Joystick(Port.JOYSTICK_ONE.GetPort());
     	joystick2 = new Attack3Joystick(Port.JOYSTICK_TWO.GetPort());
@@ -54,10 +58,12 @@ public class Robot extends IterativeRobot {
     	button1Listener = new GearShiftButtonListener(driveTrain);
     	elevationListener = new ElevationListener(elevator);
     	elevatorSolenoidListener = new ElevatorSolenoidListener(elevator);
+    	binArmListener = new BinArmButtonListener(binArm);
     	
     	joystick1.addJoystickListener(movementListener);
     	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_1, button1Listener);
     	joystick2.addButtonListener(Attack3Joystick.Button.BUTTON_1, elevatorSolenoidListener);
+    	joystick2.addButtonListener(Attack3Joystick.Button.BUTTON_2, binArmListener);
     	joystick2.addJoystickListener(elevationListener);
     	
 //    	CameraServer camera = CameraServer.getInstance();
@@ -76,9 +82,10 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	int position = autonomousRunner.getDial().getPosition();
     	joystick1.listen();
     	joystick2.listen();
-    	//elevator.updateLimitSwitches();
+//    	elevator.updateLimitSwitches();
     }
     
     public void teleopInit(){
@@ -86,10 +93,11 @@ public class Robot extends IterativeRobot {
     }
     
     public void autonomousInit(){
-     	//autonomousRunner.driveToAutoZone();
-    	//autonomousRunner.moveToteToAutoZone();
-    	autonomousRunner.moveBinToAutoZone();
-
+//     	autonomousRunner.driveToAutoZone();
+//    	autonomousRunner.moveToteToAutoZone();
+    	
+//    	autonomousRunner.moveBinToAutoZone();
+//    	autonomousRunner.setAutonomous();
     }
     
     public void disabledInit(){

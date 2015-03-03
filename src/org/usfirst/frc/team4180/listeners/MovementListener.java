@@ -20,9 +20,9 @@ public class MovementListener implements JoystickListener {
 		}
 		System.out.println("xx = " + x);
 		System.out.println("yy = " + y);
-        driveTrain.updateX(x);
-        driveTrain.updateY(y);
-        driveTrain.updateSpeed();
+//        driveTrain.updateX(x);
+//        driveTrain.updateY(y);
+//        driveTrain.updateSpeed();
 	}
 
 }

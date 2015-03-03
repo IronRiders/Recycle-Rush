@@ -7,13 +7,18 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class AutonomousRunner {
     private static final double AUTONOMOUS_SPEED = 0.3;
+    private AutonomousDial dial;
     private DriveTrain driveTrain;
     private Elevator elevator;
     
     public AutonomousRunner(DriveTrain driveTrain, Elevator elevator) {
     	this.elevator = elevator;
     	this.driveTrain = driveTrain;
-    	AutonomousDial dial = new AutonomousDial(11, 12, 13, 14);
+    	this.dial = new AutonomousDial(11, 12, 13, 14);
+    	
+    }
+    
+    public void setAutonomous() {
     	int position = dial.getPosition();
     	switch(position) {
     	case 1:
@@ -29,6 +34,10 @@ public class AutonomousRunner {
     		moveBinToAutoZone();
     		break;
     	}
+    }
+    
+    public AutonomousDial getDial() {
+    	return dial;
     }
     
     public void driveToAutoZone() {
