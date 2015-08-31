@@ -5,11 +5,13 @@ import org.usfirst.frc.team4180.robot.Port;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class Elevator {
 	private static boolean MOVING;
 	private static Jaguar WINCH_JAGUAR;
-   private static DoubleSolenoid grip;
+    private static DoubleSolenoid grip;
+    private static Solenoid gripValve;
     private final static double winchSpeed = 0.2;
 	
     /**
@@ -18,6 +20,7 @@ public class Elevator {
      */
     public Elevator(){
 		WINCH_JAGUAR = new Jaguar(Port.ELEVATION_WINCH_JAGUAR.GetPort());
+		gripValve = new Solenoid(Port.GRIPPER_VALVE.GetPort()); 
         grip = new DoubleSolenoid(Port.GRIPPER_PNEUMATIC_ACTUATOR_FORWARD.GetPort(), Port.GRIPPER_PNEUMATIC_ACTUATOR_REVERSE.GetPort());
 	}
 	
@@ -25,7 +28,7 @@ public class Elevator {
      * Gives the Jaguar the value for speed
      */
  	public void setSpeed(double speed){
- 		System.out.println("ss = " + speed);
+// 		System.out.println("ss = " + speed);
 		WINCH_JAGUAR.set(speed);
 		//double random = WINCH_JAGUAR.get();
 		//WINCH_JAGUAR.set(random);
@@ -52,6 +55,10 @@ public class Elevator {
  	public void stopWinch() {
 		setSpeed(0);
 	}
+ 	
+ 	public void raiseArmDistance(double dist){
+ 		//TODO:test for distance later
+ 	}
 	
     /**
      * Returns whether the elevator is currently moving in the form of a boolean
@@ -78,10 +85,15 @@ public class Elevator {
         grip.set(DoubleSolenoid.Value.kOff);
     }
     
-    /**
-     *  Gives the grip relay the value to reverse
-     */
     public void gripSolenoidReverse(){
         grip.set(DoubleSolenoid.Value.kReverse);
+    }
+     
+    public static void openGripperValve() {
+    	gripValve.set(true);
+    }
+    
+    public static void closeGripperValve() {
+    	gripValve.set(false);
     }
 }

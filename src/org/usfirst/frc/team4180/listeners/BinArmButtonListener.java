@@ -13,7 +13,7 @@ public class BinArmButtonListener implements ButtonListener {
 	
 	public void buttonDown() {
 		if(open) {
-			arm.retractArm();
+//			arm.retractArm();
 		} else {
 			arm.extendArm();
 		}

@@ -5,14 +5,22 @@ import java.util.Hashtable;
 
 import org.usfirst.frc.team4180.listeners.ButtonListener;
 import org.usfirst.frc.team4180.listeners.JoystickListener;
-import org.usfirst.frc.team4180.robot.Robot;
 
+/* Class Description:
+ * The Attack3Joystick class is the object that controls 
+ *    and represents the physical Attack3Joystick which we use to control the
+ *    robot in the corporeal real of physical pain (also known as real life)
+ */
 public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
-    
+		/* BUTTON_LISTENERS Description:
+	    BUTTON_LISTENERS is a HashTable that contains all of the button listeners in for all of the Buttons in BUTTONS */
     private Hashtable<Button,ArrayList<ButtonListener>> BUTTON_LISTENERS;
+    	/* JOYSTICK_LISTENERS Description: 
+    	JOYSTICK_LISTENERS is an ArrayList that holds all of the listeners that listen to the Attack3Joystick peripheral*/
     private ArrayList<JoystickListener> JOYSTICK_LISTENERS;
     private Thread[] THREADS;
     private Hashtable<Button,Boolean> STATE;
+    
     public static final Button[] BUTTONS = new Button[] {
         Button.BUTTON_1,  
         Button.BUTTON_2,  
@@ -25,7 +33,8 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
         Button.BUTTON_9, 
         Button.BUTTON_10, 
         Button.BUTTON_11};
-    
+    	// BUTTONS is an array of all of the different physical buttons on the Attack3Joystick
+
     public Attack3Joystick(int port) {
         super(port);
         THREADS = new Thread[BUTTONS.length];
@@ -58,10 +67,8 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
     
     public void addButtonListener(Button button, ButtonListener listener) {
         if (!BUTTON_LISTENERS.contains(button)) {
-        	
             BUTTON_LISTENERS.put(button, new ArrayList<ButtonListener>());
         }
-        
         BUTTON_LISTENERS.get(button).add(listener);
     }
     
@@ -116,7 +123,6 @@ public class Attack3Joystick extends edu.wpi.first.wpilibj.Joystick{
     }
     
     public static class Button {
-        
         public static final Button BUTTON_1 = new Button(1);
         public static final Button BUTTON_2 = new Button(2);
         public static final Button BUTTON_3 = new Button(3);

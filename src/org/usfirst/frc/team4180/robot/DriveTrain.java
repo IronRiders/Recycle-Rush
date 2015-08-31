@@ -1,5 +1,9 @@
 package org.usfirst.frc.team4180.robot;
 
+import org.usfirst.frc.team4180.sensors.UltrasonicRangeSensor;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -14,6 +18,10 @@ public class DriveTrain {
     private DoubleSolenoid gearShift;
     private Solenoid gearShift1;
     private Solenoid gearShift2;
+    private BuiltInAccelerometer accelerometer;
+    private UltrasonicRangeSensor ultrosonicRangeFinder;
+    private int raw;
+    private int averageRaw;
 	
 	public DriveTrain(){
 		gearShift = new DoubleSolenoid(Port.PNEUMATIC_GEARBOX_SHIFTING_FORWARD.GetPort(), Port.PNEUMATIC_GEARBOX_SHIFTING_REVERSE.GetPort());
@@ -24,6 +32,10 @@ public class DriveTrain {
 		talonLeft = new Talon(Port.LEFT_TALONS.GetPort());
 		joystickX = 0.0;
 		joystickY = 0.0;
+		accelerometer = new BuiltInAccelerometer();
+//		ultrosonicRangeFinder = new UltrasonicRangeSensor(0); 
+//		raw = ultrosonicRangeFinder.getValue();
+//		averageRaw = ultrosonicRangeFinder.getAverageValue();
 	}
 	
 	public void setSpeed(double speed) {
@@ -31,8 +43,10 @@ public class DriveTrain {
 	}
 		
 	public void setSpeed(double rightTalonSpeed, double leftTalonSpeed){
-		talonRight.set(-rightTalonSpeed);
-		talonLeft.set(leftTalonSpeed);
+		talonRight.set(-rightTalonSpeed*.4);
+		talonLeft.set(leftTalonSpeed*.4);
+//		talonRight.set(0);
+//		talonLeft.set(0);
 	}
 	
 	public void stopRobot(){
@@ -59,7 +73,7 @@ public class DriveTrain {
      */
     
     public void gearShiftSolenoidOn(){
-        gearShift.set(DoubleSolenoid.Value.kForward);
+//        gearShift.set(DoubleSolenoid.Value.kForward);
     	//gearShift1.set(true);
     	//gearShift2.set(true);
     }
@@ -69,14 +83,28 @@ public class DriveTrain {
      */
     
     public void gearShiftSolenoidOff(){
-        gearShift.set(DoubleSolenoid.Value.kOff);
+//        gearShift.set(DoubleSolenoid.Value.kOff);
     	//gearShift1.set(false);
     	//gearShift2.set(false);
     }
     
     public void gearShiftSolenoidReverse(){
-        gearShift.set(DoubleSolenoid.Value.kReverse);
+//        gearShift.set(DoubleSolenoid.Value.kReverse);
     }
+    
+    public BuiltInAccelerometer getAccelerometer(){
+    	return accelerometer;
+    	    	
+    }
+    
+    public double getRange() {
+    	return ultrosonicRangeFinder.getRangeInches();
+    }
+    
+//    public void printRawAndAverageRaw(){
+//    	System.out.println(raw + "raw");
+//    	System.out.println(averageRaw + "averageRaw");
+//    }
     
 }
 

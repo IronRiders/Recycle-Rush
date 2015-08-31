@@ -21,44 +21,12 @@ public class ElevationListener implements JoystickListener {
 	
 	@Override
 	public void joystickMoved(double x, double y, double z) {
-		System.out.println("BottomSwitch: " + BOTTOM_LIMIT_SWITCH.get());
-		System.out.println("TopSwitch:    " + TOP_LIMIT_SWITCH.get());
-
-		if(!BOTTOM_LIMIT_SWITCH.get()) {
-			elevator.raiseArm();
-		} else if(!TOP_LIMIT_SWITCH.get()) {
-			elevator.lowerArm();
-		} else {
-			if(y < .05 && y > -.05) {
-				y = 0; //HELLO AARON //Alex is butt
-			}
-			y = -y;
-			
-			elevator.setSpeed(y);
+		if(y < .05 && y > -.05) {
+			y = 0; //HELLO AARON //Alex is butt
 		}
+		y = -y;
+		
+		elevator.setSpeed(y);
 	}
-
-//	private void setSpeed(double speed) { 
-//		if(speed < 0.2 && speed > -0.2) {
-//			if(!encoder.getStopped()) {
-//				if(first) {
-//					currentSpeed = speed;
-//				}
-//				
-//				if(encoder.getDirection()) {
-//					currentSpeed += INCREMENT;
-//					elevator.setSpeed(currentSpeed);
-//				} else {
-//					currentSpeed -= INCREMENT;
-//					elevator.setSpeed(currentSpeed);
-//				}
-//			} else {
-//				first = true;
-//			}
-//		} else {
-//			first = true;
-//			elevator.setSpeed(speed);
-//		}
-//	}
 
 }

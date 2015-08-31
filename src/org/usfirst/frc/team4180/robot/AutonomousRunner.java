@@ -12,6 +12,7 @@ public class AutonomousRunner {
     private Elevator elevator;
 	private static final double SPEED_ON_TILE = 25.0;
 	private static final double TURNING_RATE_ON_TILE = 115.0/2.0; //degree per second
+	private static final double TURNING_RATE_ON_CARPET = 115.0/2.0;
     
     public AutonomousRunner(DriveTrain driveTrain, Elevator elevator) {
     	this.elevator = elevator;
@@ -47,25 +48,28 @@ public class AutonomousRunner {
     
     //precondition: facing tote.
     public void moveToteToAutoZone() {
-    	
+    	driveTrain.gearShiftSolenoidOn();
     	elevator.gripSolenoidOn();
     	Timer.delay(.6); //TODO:test
-    	turnDegree(90);
+    	turnDegree(110);
     	driveToAutoZone();
     }
     
     public void moveBinToAutoZone() {
 ////    	start facing bin
     	//	grip bin
-    		elevator.gripSolenoidOn();
+    		Timer.delay(5);
+    		driveTrain.gearShiftSolenoidOn();
+    		elevator.gripSolenoidReverse();
     		Timer.delay(.6); //TODO:test
     		elevator.stopWinch();
-    		turnDegree(-90);
+    		turnDegree(-110);
     		driveToAutoZone();
     } 
     
     public void toteAndBinToAutoZone(){
     	//grip bin
+    	driveTrain.gearShiftSolenoidOn();
     	elevator.gripSolenoidOn();
     	Timer.delay(.6);//TODO:test
     	elevator.stopWinch();
@@ -79,7 +83,7 @@ public class AutonomousRunner {
     	elevator.lowerArm(); 
     	Timer.delay(.6);//TODO:test
     	elevator.stopWinch();
-    	turnDegree(90);
+    	turnDegree(110);
     	driveToAutoZone();
     }
     
@@ -98,8 +102,22 @@ public class AutonomousRunner {
     	Timer.delay(Math.abs(degree)/TURNING_RATE_ON_TILE);
     	driveTrain.stopRobot();
     }
-    
+    public void testSpeed(){
+    	driveTrain.setSpeed(0.1);
+    }
     public void disableAutonomous() {
     	
+    }
+    
+    public void testMovement() {
+    	driveTrain.gearShiftSolenoidOff();
+//    	moveDistance();
+    	turnDegree(90);
+//    	Timer.delay(1);
+//    	turnDegree(-90);
+    }
+    
+    public void testAcceleromter(){
+    	driveTrain.setSpeed(-.25);
     }
 }

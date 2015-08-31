@@ -1,8 +1,12 @@
 package org.usfirst.frc.team4180.listeners;
 
 import org.usfirst.frc.team4180.elevator.Elevator;
+import org.usfirst.frc.team4180.robot.Port;
+
+import edu.wpi.first.wpilibj.Jaguar;
 
 public class ElevatorSolenoidListener implements ButtonListener {
+	Jaguar arm = new Jaguar(Port.BIN_ARM_JAGUAR.GetPort());
 	private Elevator elevator;
 	private boolean open;
 	
@@ -18,7 +22,11 @@ public class ElevatorSolenoidListener implements ButtonListener {
 			elevator.gripSolenoidOn();
 		}
 		open = !open;
+//		arm.set(.25);
+
 	}
 
-	public void buttonUp() {}
+	public void buttonUp() {
+		arm.set(0);
+	}
 }

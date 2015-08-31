@@ -99,14 +99,14 @@ public class Pneumatics {
      * Turns the grip solenoid on
      */
     public void gripSolenoidOn(){
-        grip.set(true);
+        grip.set(false);
     }
     
     /**
      * Turns the grip solenoid off
      */
     public void gripSolenoidOff(){
-        grip.set(false);
+        grip.set(true);
     }
     
     /**

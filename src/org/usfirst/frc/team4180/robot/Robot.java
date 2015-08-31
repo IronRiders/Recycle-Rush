@@ -12,6 +12,7 @@ import org.usfirst.frc.team4180.listeners.ElevationListener;
 import org.usfirst.frc.team4180.listeners.ElevatorSolenoidListener;
 import org.usfirst.frc.team4180.listeners.GearShiftButtonListener;
 import org.usfirst.frc.team4180.listeners.Button2Listener;
+import org.usfirst.frc.team4180.listeners.GripperValveButtonListener;
 import org.usfirst.frc.team4180.listeners.MovementListener;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -38,6 +39,7 @@ public class Robot extends IterativeRobot {
     private MovementListener movementListener;
     private GearShiftButtonListener button1Listener;
     private ElevatorSolenoidListener elevatorSolenoidListener;
+    private GripperValveButtonListener valveListener;
     private ElevationListener elevationListener;
     private BinArmButtonListener binArmListener;
     private AutonomousRunner autonomousRunner;
@@ -47,9 +49,10 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	System.out.println("Robot Iitiated");
     	elevator = new Elevator();
     	driveTrain = new DriveTrain();
-    	binArm = new BinArm();
+//    	binArm = new BinArm();
     	autonomousRunner = new AutonomousRunner(driveTrain, elevator);
     	joystick1 = new Attack3Joystick(Port.JOYSTICK_ONE.GetPort());
     	joystick2 = new Attack3Joystick(Port.JOYSTICK_TWO.GetPort());
@@ -58,12 +61,14 @@ public class Robot extends IterativeRobot {
     	button1Listener = new GearShiftButtonListener(driveTrain);
     	elevationListener = new ElevationListener(elevator);
     	elevatorSolenoidListener = new ElevatorSolenoidListener(elevator);
-    	binArmListener = new BinArmButtonListener(binArm);
+    	valveListener = new GripperValveButtonListener(elevator);
+//    	binArmListener = new BinArmButtonListener(binArm);
     	
     	joystick1.addJoystickListener(movementListener);
     	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_1, button1Listener);
+    	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_3, valveListener);
     	joystick2.addButtonListener(Attack3Joystick.Button.BUTTON_1, elevatorSolenoidListener);
-    	joystick2.addButtonListener(Attack3Joystick.Button.BUTTON_2, binArmListener);
+//    	joystick1.addButtonListener(Attack3Joystick.Button.BUTTON_2, binArmListener);
     	joystick2.addJoystickListener(elevationListener);
     	
 //    	CameraServer camera = CameraServer.getInstance();
@@ -75,29 +80,36 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-
+    	//System.out.println(" x " + driveTrain.getAccelerometer().getX());
+    	//System.out.println(" y " + driveTrain.getAccelerometer().getY());
+    	System.out.println(" z " + driveTrain.getAccelerometer().getZ());
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	int position = autonomousRunner.getDial().getPosition();
+//    	int position = autonomousRunner.getDial().getPosition();
     	joystick1.listen();
-    	joystick2.listen();
+//    	joystick2.listen();
 //    	elevator.updateLimitSwitches();
+//    	System.out.println(driveTrain.getVoltage() + "Voltage");
+//    	System.out.println(driveTrain.getAverageVoltage() + "Voltage");
+//    	driveTrain.printRawAndAverageRaw();
+//    	driveTrain.getRange();
     }
     
     public void teleopInit(){
+//    	elevator.openGripperValve();
 //    	driveTrain.gearShiftSolenoidOn();
     }
     
     public void autonomousInit(){
-//     	autonomousRunner.driveToAutoZone();
-//    	autonomousRunner.moveToteToAutoZone();
-    	
-//    	autonomousRunner.moveBinToAutoZone();
-//    	autonomousRunner.setAutonomous();
+    	//elevator.openGripperValve();
+//    	autonomousRunner.testMovement();
+//    	autonomousRunner.testSpeed();
+    	// autonomousRunner.moveBinToAutoZone();
+//    	autonomousRunner.testAcceleromter();
     }
     
     public void disabledInit(){
